@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 
 
 import AppHeader from "../appHeader/AppHeader";
@@ -7,46 +7,40 @@ import CharList from "../charList/CharList";
 import CharInfo from "../charInfo/CharInfo";
 import ErrorBoundary from "../errorBoundary/ErrorBoundary";
 
+// import OwnHookTest from "../ownHookTest/ownHookTest";
+
 import decoration from '../../resources/img/vision.png';
 
 
-class App extends Component {
+function App() {
 
-    state = {
-        selectedChar: null,
-    }
+    const [selectedChar, setSelectedChar] = useState(null);
 
-    onSelectedChar = (id) => {
+    const onSelectedChar = (id) => {
         // console.log(id)
-        this.setState({selectedChar: id})
-        // console.log(this.state.selectedChar)
+        setSelectedChar(id)
     }
     
+    return (
+        <div className="app">
+            <AppHeader/>
+            <main>
+                <RandomChar/>
+                {/* <div className="char__content">
+                    <ErrorBoundary>
+                        <CharList onSelectedChar={onSelectedChar} ></CharList>
+                    </ErrorBoundary>
+                    <ErrorBoundary>
+                        <CharInfo selectedChar={selectedChar} />
+                    </ErrorBoundary>
 
-    render() {
-        return (
-            <div className="app">
-                <AppHeader/>
-                <main>
-                    {/* <Test>
-                        <div>123</div>
-                        <div>321</div>
-                    </Test> */}
-                    <RandomChar/>
-                    <div className="char__content">
-                        <ErrorBoundary>
-                            <CharList onSelectedChar={this.onSelectedChar} ></CharList>
-                        </ErrorBoundary>
-                        <ErrorBoundary>
-                            <CharInfo selectedChar={this.state.selectedChar} />
-                        </ErrorBoundary>
-    
-                    </div>
-                    <img className="bg-decoration" src={decoration} alt="vision"/>
-                </main>
-            </div>
-        )
-    }
+                </div>
+                <img className="bg-decoration" src={decoration} alt="vision"/> */}
+            </main>
+            {/* <OwnHookTest></OwnHookTest> */}
+        </div>
+    )
+
 }
 
 function Test(props) {
@@ -59,8 +53,5 @@ function Test(props) {
     )
 }
 
-function TestLeftRight() {
-
-}
 
 export default App;
